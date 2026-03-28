@@ -80,6 +80,15 @@
             border-color: var(--gold)
         }
 
+        @media (pointer: coarse) {
+            #cur, #cur-r {
+                display: none !important;
+            }
+            * {
+                cursor: auto !important;
+            }
+        }
+
         /* GRAIN */
         #grain {
             position: fixed;
