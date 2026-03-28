@@ -1,0 +1,2596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lt. Col. DD Goel — When Doubt Becomes Wings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --black: #000;
+      --off-black: #050505;
+      --deep: #0a0a0a;
+      --surface: #111;
+      --border: rgba(255, 255, 255, 0.07);
+      --white: #fff;
+      --off-white: #f0ede8;
+      --gray: #888;
+      --lgray: #555;
+      --gold: #c9a96e;
+      --gold-dim: rgba(201, 169, 110, 0.12);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden
+    }
+
+    body {
+      background: var(--black);
+      color: var(--off-white);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      cursor: none;
+      overflow-x: hidden
+    }
+
+    /* CURSOR */
+    #cur {
+      position: fixed;
+      width: 9px;
+      height: 9px;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference
+    }
+
+    #cur-r {
+      position: fixed;
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width .3s, height .3s, border-color .3s
+    }
+
+    .ch #cur-r {
+      width: 52px;
+      height: 52px;
+      border-color: var(--gold)
+    }
+
+    /* GRAIN */
+    #grain {
+      position: fixed;
+      inset: -200%;
+      width: 400%;
+      height: 400%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: .024;
+      pointer-events: none;
+      z-index: 9990;
+      animation: gm 8s steps(10) infinite
+    }
+
+    @keyframes gm {
+
+      0%,
+      100% {
+        transform: translate(0, 0)
+      }
+
+      10% {
+        transform: translate(-3%, -3%)
+      }
+
+      20% {
+        transform: translate(2%, 2%)
+      }
+
+      30% {
+        transform: translate(-1%, 3%)
+      }
+
+      40% {
+        transform: translate(3%, -1%)
+      }
+
+      50% {
+        transform: translate(-2%, 2%)
+      }
+
+      60% {
+        transform: translate(1%, -2%)
+      }
+
+      70% {
+        transform: translate(-3%, 1%)
+      }
+
+      80% {
+        transform: translate(2%, -3%)
+      }
+
+      90% {
+        transform: translate(-1%, 2%)
+      }
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 26px 60px;
+      transition: background .5s, padding .4s
+    }
+
+    nav.scrolled {
+      background: rgba(0, 0, 0, .92);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      padding: 15px 60px;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .nl {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      letter-spacing: .22em;
+      color: var(--off-white);
+      text-decoration: none;
+      text-transform: uppercase
+    }
+
+    #mob-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--off-white);
+      cursor: none;
+      padding: 5px;
+    }
+
+    #mob-btn svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .nls {
+      display: flex;
+      gap: 38px;
+      list-style: none
+    }
+
+    .nls a {
+      font-size: .66rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color .3s;
+      font-weight: 400
+    }
+
+    .nls a:hover {
+      color: var(--off-white)
+    }
+
+    /* HERO */
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden
+    }
+
+    #sky {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%
+    }
+
+    /* PARAGLIDER — image layers */
+    #pgscene {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1
+    }
+
+    /* Paraglider wrapper */
+    .pgw {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    /* WING */
+    .wing {
+      width: 100%;
+      display: block;
+    }
+
+    /* PILOT */
+    .pilot {
+      position: absolute;
+      width: 26%;
+      bottom: -18%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* PARAGLIDER JS CONTAINERS */
+    #pg-main,
+    #pg-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      will-change: transform;
+      z-index: 1;
+    }
+
+    #pg-main {
+      width: clamp(140px, 18vw, 220px);
+      filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.4));
+    }
+
+    #pg-bg {
+      width: clamp(90px, 12vw, 150px);
+      opacity: 0.4;
+      filter: blur(1.5px) brightness(0.7);
+    }
+
+    /* Vignette + bottom fade */
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, transparent 22%, rgba(0, 0, 0, .7) 100%);
+      pointer-events: none;
+      z-index: 2
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      background: linear-gradient(to bottom, transparent, #000);
+      pointer-events: none;
+      z-index: 3
+    }
+
+    .hc {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 920px;
+      padding: 0 40px
+    }
+
+    .hey {
+      font-size: .63rem;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 400;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fu 1s .5s ease forwards;
+      display: block
+    }
+
+    .ht {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.3rem, 5.5vw, 4.9rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--off-white);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fu 1.2s .85s ease forwards;
+      text-shadow: 0 2px 60px rgba(0, 0, 0, .9)
+    }
+
+    .ht em {
+      font-style: italic;
+      color: var(--gold)
+    }
+
+    .hs {
+      font-size: .76rem;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: rgba(240, 237, 232, .42);
+      font-weight: 300;
+      margin-bottom: 50px;
+      opacity: 0;
+      animation: fu 1s 1.3s ease forwards
+    }
+
+    .hctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      opacity: 0;
+      animation: fu 1s 1.7s ease forwards
+    }
+
+    .bp {
+      padding: 13px 34px;
+      background: transparent;
+      border: 1px solid var(--off-white);
+      color: var(--off-white);
+      font-family: 'Outfit', sans-serif;
+      font-size: .69rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-weight: 400;
+      cursor: none;
+      text-decoration: none;
+      transition: background .4s, color .4s, box-shadow .4s;
+      display: inline-block
+    }
+
+    .bp:hover {
+      background: var(--off-white);
+      color: #000;
+      box-shadow: 0 0 36px rgba(255, 255, 255, .1)
+    }
+
+    .bg {
+      padding: 13px 34px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, .17);
+      color: rgba(255, 255, 255, .52);
+      font-family: 'Outfit', sans-serif;
+      font-size: .69rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-weight: 400;
+      cursor: none;
+      text-decoration: none;
+      transition: border-color .3s, color .3s;
+      display: inline-block
+    }
+
+    .bg:hover {
+      border-color: var(--gold);
+      color: var(--gold)
+    }
+
+    .sh {
+      position: absolute;
+      bottom: 34px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      animation: fi 1s 2.4s ease forwards
+    }
+
+    .sh span {
+      font-size: .57rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--lgray)
+    }
+
+    .sl {
+      width: 1px;
+      height: 44px;
+      background: linear-gradient(to bottom, var(--lgray), transparent);
+      animation: sp 2s ease-in-out infinite
+    }
+
+    @keyframes sp {
+
+      0%,
+      100% {
+        opacity: .4;
+        transform: scaleY(1)
+      }
+
+      50% {
+        opacity: 1;
+        transform: scaleY(1.2)
+      }
+    }
+
+    @keyframes fu {
+      from {
+        opacity: 0;
+        transform: translateY(26px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes fi {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: .7
+      }
+    }
+
+    /* SHARED */
+    section {
+      position: relative
+    }
+
+    .si {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 130px 60px
+    }
+
+    .rv {
+      opacity: 0;
+      transform: translateY(42px);
+      transition: opacity .9s ease, transform .9s ease
+    }
+
+    .rv.vis {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    .rl {
+      opacity: 0;
+      transform: translateX(-42px);
+      transition: opacity .9s ease, transform .9s ease
+    }
+
+    .rl.vis {
+      opacity: 1;
+      transform: translateX(0)
+    }
+
+    .rr {
+      opacity: 0;
+      transform: translateX(42px);
+      transition: opacity .9s ease, transform .9s ease
+    }
+
+    .rr.vis {
+      opacity: 1;
+      transform: translateX(0)
+    }
+
+    .d1 {
+      transition-delay: .12s
+    }
+
+    .d2 {
+      transition-delay: .24s
+    }
+
+    .d3 {
+      transition-delay: .36s
+    }
+
+    .d4 {
+      transition-delay: .48s
+    }
+
+    .d5 {
+      transition-delay: .6s
+    }
+
+    .sl2 {
+      font-size: .6rem;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 400;
+      margin-bottom: 16px;
+      display: block
+    }
+
+    .snum {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 7rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, .028);
+      position: absolute;
+      top: 80px;
+      right: 60px;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none
+    }
+
+    .pt {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.1rem, 4vw, 3.3rem);
+      font-weight: 300;
+      color: var(--off-white);
+      margin-bottom: 16px;
+      line-height: 1.15
+    }
+
+    .pt em {
+      font-style: italic;
+      color: var(--gold)
+    }
+
+    .ps {
+      font-size: .86rem;
+      color: var(--gray);
+      line-height: 1.85;
+      font-weight: 300
+    }
+
+    .tl {
+      display: block;
+      width: 42px;
+      height: 1px;
+      background: var(--gold);
+      opacity: .5;
+      margin: 24px 0
+    }
+
+    /* CHAPTERS */
+    .ch2 {
+      border-top: 1px solid var(--border);
+      min-height: 90vh;
+      display: flex;
+      align-items: center
+    }
+
+    .chi {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 110px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 78px;
+      align-items: center;
+      width: 100%
+    }
+
+    .chi.rev {
+      direction: rtl
+    }
+
+    .chi.rev>* {
+      direction: ltr
+    }
+
+    .cv {
+      position: relative;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border)
+    }
+
+    .cv::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: linear-gradient(135deg, rgba(0, 0, 0, .22), transparent, rgba(0, 0, 0, .42))
+    }
+
+    .cva {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+    }
+
+    .cn {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .7rem;
+      letter-spacing: .32em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: block
+    }
+
+    .ct {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.3rem, 3.8vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--off-white);
+      margin-bottom: 26px
+    }
+
+    .ct em {
+      font-style: italic;
+      color: var(--gold)
+    }
+
+    .cb {
+      font-size: .9rem;
+      line-height: 1.95;
+      color: rgba(240, 237, 232, .5);
+      font-weight: 300;
+      margin-bottom: 14px
+    }
+
+    .cq {
+      border-left: 2px solid var(--gold);
+      padding-left: 20px;
+      margin-top: 26px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: rgba(240, 237, 232, .65);
+      line-height: 1.65
+    }
+
+    .vf {
+      background: linear-gradient(160deg, #180808, #000)
+    }
+
+    .vs {
+      background: linear-gradient(160deg, #08081a, #000)
+    }
+
+    .vr {
+      background: linear-gradient(160deg, #08180a, #000)
+    }
+
+    .vfl {
+      background: linear-gradient(160deg, #0c0c1c, #03030a)
+    }
+
+    /* ACHIEVEMENTS */
+    #ach {
+      background: var(--deep);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border)
+    }
+
+    .ag {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr)
+    }
+
+    .ai {
+      padding: 66px 42px;
+      background: var(--off-black);
+      border-right: 1px solid var(--border);
+      transition: background .3s;
+      text-align: center
+    }
+
+    .ai:last-child {
+      border-right: none
+    }
+
+    .ai:hover {
+      background: var(--surface)
+    }
+
+    .an {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 4.5vw, 4rem);
+      font-weight: 300;
+      color: var(--off-white);
+      line-height: 1;
+      margin-bottom: 11px;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 2px
+    }
+
+    .an sup {
+      font-size: .42em;
+      color: var(--gold)
+    }
+
+    .al {
+      font-size: .66rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gray);
+      font-weight: 400;
+      line-height: 1.6
+    }
+
+    /* SERVICES */
+    #svc {
+      background: var(--black)
+    }
+
+    .svch {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 70px
+    }
+
+    .svgg {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px
+    }
+
+    .sc {
+      padding: 48px 40px;
+      background: var(--off-black);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: border-color .4s;
+      cursor: none
+    }
+
+    .sc::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% -8%, rgba(201, 169, 110, .06), transparent 68%);
+      opacity: 0;
+      transition: opacity .5s
+    }
+
+    .sc:hover {
+      border-color: rgba(201, 169, 110, .26)
+    }
+
+    .sc:hover::after {
+      opacity: 1
+    }
+
+    .si2 {
+      width: 34px;
+      height: 34px;
+      margin-bottom: 26px;
+      color: var(--gold);
+      opacity: .72
+    }
+
+    .st {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 300;
+      color: var(--off-white);
+      margin-bottom: 13px;
+      line-height: 1.2
+    }
+
+    .sd {
+      font-size: .82rem;
+      color: var(--gray);
+      line-height: 1.85;
+      font-weight: 300
+    }
+
+    .stag {
+      display: inline-block;
+      margin-top: 22px;
+      font-size: .59rem;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid rgba(201, 169, 110, .22);
+      padding-bottom: 3px
+    }
+
+    /* SSB COURSE */
+    #ssb {
+      background: var(--deep);
+      border-top: 1px solid var(--border)
+    }
+
+    .ssbi {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 60px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 76px;
+      align-items: start
+    }
+
+    .sbadge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(201, 169, 110, .07);
+      border: 1px solid rgba(201, 169, 110, .18);
+      padding: 7px 16px;
+      margin-bottom: 26px
+    }
+
+    .sbdot {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: .35;
+        transform: scale(1.4)
+      }
+    }
+
+    .sbadge span {
+      font-size: .6rem;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 400
+    }
+
+    .ssbt {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.1rem, 3.8vw, 3.3rem);
+      font-weight: 300;
+      color: var(--off-white);
+      line-height: 1.15;
+      margin-bottom: 20px
+    }
+
+    .ssbt em {
+      color: var(--gold);
+      font-style: italic
+    }
+
+    .ssbb {
+      font-size: .87rem;
+      color: var(--gray);
+      line-height: 1.9;
+      margin-bottom: 28px
+    }
+
+    .ssbf {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-bottom: 32px
+    }
+
+    .ssbfr {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      font-size: .82rem;
+      color: rgba(240, 237, 232, .58)
+    }
+
+    .ssbfd {
+      width: 5px;
+      height: 5px;
+      background: var(--gold);
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0
+    }
+
+    .ssbpr {
+      display: flex;
+      align-items: baseline;
+      gap: 13px;
+      margin-bottom: 28px
+    }
+
+    .ssbo {
+      font-size: 1.1rem;
+      color: var(--lgray);
+      text-decoration: line-through;
+      font-family: 'Cormorant Garamond', serif
+    }
+
+    .ssbn {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.1rem;
+      font-weight: 300;
+      color: var(--off-white)
+    }
+
+    .ssbpt {
+      font-size: .63rem;
+      letter-spacing: .17em;
+      color: var(--gold);
+      text-transform: uppercase;
+      background: rgba(201, 169, 110, .1);
+      padding: 4px 9px
+    }
+
+    .ssbcta {
+      display: inline-block;
+      padding: 15px 36px;
+      background: var(--gold);
+      color: #000;
+      font-family: 'Outfit', sans-serif;
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      transition: opacity .3s, box-shadow .3s;
+      cursor: none
+    }
+
+    .ssbcta:hover {
+      opacity: .86;
+      box-shadow: 0 0 38px rgba(201, 169, 110, .22)
+    }
+
+    .ssbr {
+      background: var(--off-black);
+      border: 1px solid var(--border);
+      padding: 42px
+    }
+
+    .ssbstars {
+      color: var(--gold);
+      font-size: .95rem;
+      letter-spacing: .1em;
+      margin-bottom: 12px
+    }
+
+    .ssbnum {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--off-white);
+      line-height: 1;
+      margin-bottom: 5px
+    }
+
+    .ssbsub {
+      font-size: .66rem;
+      letter-spacing: .17em;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 32px
+    }
+
+    .ssbrvs {
+      display: flex;
+      flex-direction: column;
+      gap: 22px
+    }
+
+    .ssbrv {
+      border-top: 1px solid var(--border);
+      padding-top: 20px
+    }
+
+    .ssbrvt {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .98rem;
+      font-style: italic;
+      color: rgba(240, 237, 232, .62);
+      line-height: 1.7;
+      margin-bottom: 9px
+    }
+
+    .ssbrva {
+      font-size: .63rem;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+      color: var(--lgray)
+    }
+
+    /* AWARDS */
+    #awards {
+      background: var(--black);
+      border-top: 1px solid var(--border)
+    }
+
+    .awh {
+      max-width: 700px;
+      margin: 0 auto 66px;
+      text-align: center
+    }
+
+    .awg {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px
+    }
+
+    .awi {
+      padding: 42px 34px;
+      background: var(--off-black);
+      border: 1px solid var(--border);
+      transition: background .3s, border-color .3s;
+      cursor: none;
+      position: relative;
+      overflow: hidden
+    }
+
+    .awi::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity .4s
+    }
+
+    .awi:hover {
+      background: var(--surface);
+      border-color: rgba(201, 169, 110, .14)
+    }
+
+    .awi:hover::before {
+      opacity: .55
+    }
+
+    .awic {
+      width: 32px;
+      height: 32px;
+      color: var(--gold);
+      opacity: .58;
+      margin-bottom: 16px
+    }
+
+    .awn {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--off-white);
+      margin-bottom: 7px;
+      line-height: 1.3
+    }
+
+    .awd {
+      font-size: .7rem;
+      color: var(--lgray);
+      letter-spacing: .1em
+    }
+
+    /* GALLERY */
+    #gallery {
+      background: var(--deep);
+      border-top: 1px solid var(--border)
+    }
+
+    .gh {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 60px
+    }
+
+    .gg {
+      columns: 4;
+      column-gap: 10px;
+    }
+
+    .gi {
+      break-inside: avoid;
+      margin-bottom: 10px;
+      position: relative;
+      overflow: hidden;
+      background: var(--surface);
+      cursor: none;
+      border: 1px solid var(--border);
+    }
+
+    /* LIGHTBOX CSS */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    #lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #lb-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 4px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      display: none;
+    }
+
+    #lb-vid {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 4px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      display: none;
+    }
+
+    #lb-close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 1.2rem;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.2rem;
+    }
+
+    .ga {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform .7s ease
+    }
+
+    .gi:hover .ga {
+      transform: scale(1.05)
+    }
+
+    .gov {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0);
+      transition: background .4s;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+      z-index: 2
+    }
+
+    .gi:hover .gov {
+      background: rgba(0, 0, 0, .52)
+    }
+
+    .glab {
+      font-size: .63rem;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0);
+      transition: color .4s
+    }
+
+    .gi:hover .glab {
+      color: rgba(255, 255, 255, .7)
+    }
+
+    /* TESTIMONIALS */
+    #testi {
+      background: var(--black);
+      border-top: 1px solid var(--border)
+    }
+
+    .tg {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 54px
+    }
+
+    .tc {
+      padding: 40px 32px;
+      background: var(--off-black);
+      border: 1px solid var(--border);
+      position: relative;
+      transition: border-color .3s
+    }
+
+    .tc:hover {
+      border-color: var(--gold-dim)
+    }
+
+    .tc::before {
+      content: '"';
+      position: absolute;
+      top: 16px;
+      left: 26px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      color: var(--gold);
+      opacity: .14;
+      line-height: 1
+    }
+
+    .tt {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.02rem;
+      font-style: italic;
+      line-height: 1.78;
+      color: rgba(240, 237, 232, .7);
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1
+    }
+
+    .ta {
+      font-size: .66rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gray)
+    }
+
+    .tr {
+      font-size: .63rem;
+      color: var(--gold);
+      margin-top: 4px;
+      letter-spacing: .1em
+    }
+
+    /* TRUSTED BY */
+    #trusted {
+      background: var(--deep);
+      border-top: 1px solid var(--border)
+    }
+
+    .tbh {
+      text-align: center;
+      margin-bottom: 52px
+    }
+
+    .tbhl {
+      font-size: .58rem;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: var(--lgray)
+    }
+
+    .tbg {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center
+    }
+
+    .tbi {
+      padding: 34px 50px;
+      border: 1px solid var(--border);
+      transition: border-color .3s;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .tbi:hover {
+      border-color: rgba(255, 255, 255, .1)
+    }
+
+    .tbt {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .17);
+      letter-spacing: .06em;
+      transition: color .3s;
+      text-align: center;
+      line-height: 1.4
+    }
+
+    .tbi:hover .tbt {
+      color: rgba(255, 255, 255, .35)
+    }
+
+    /* BOOKS */
+    #books {
+      background: var(--black);
+      border-top: 1px solid var(--border)
+    }
+
+    .bkh {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 60px
+    }
+
+    .bkg {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px
+    }
+
+    .bkg .bkc {
+      flex: 1 1 200px;
+      max-width: 240px;
+    }
+
+    .bkc {
+      cursor: none;
+      transition: transform .1s
+    }
+
+    .bkcov {
+      aspect-ratio: 3/4;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 20px;
+      transition: box-shadow .5s
+    }
+
+    .bkc:hover .bkcov {
+      box-shadow: -10px 14px 52px rgba(0, 0, 0, .82), 0 0 34px rgba(201, 169, 110, .05)
+    }
+
+    .bkca {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 26px
+    }
+
+    .bktd {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--off-white);
+      text-align: center;
+      line-height: 1.3;
+      margin-top: 12px
+    }
+
+    .bkn {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--off-white);
+      margin-bottom: 5px
+    }
+
+    .bkm {
+      font-size: .64rem;
+      letter-spacing: .11em;
+      color: var(--lgray);
+      margin-bottom: 12px
+    }
+
+    .bkbuy {
+      display: inline-block;
+      padding: 9px 20px;
+      border: 1px solid var(--border);
+      font-size: .62rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      transition: border-color .3s, color .3s;
+      cursor: none
+    }
+
+    .bkbuy:hover {
+      border-color: var(--gold);
+      color: var(--gold)
+    }
+
+    /* CONTACT */
+    #contact {
+      background: var(--deep);
+      border-top: 1px solid var(--border)
+    }
+
+    .cog {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 76px;
+      align-items: start
+    }
+
+    .cot {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+      font-weight: 300;
+      color: var(--off-white);
+      margin-bottom: 20px;
+      line-height: 1.2
+    }
+
+    .cot em {
+      color: var(--gold);
+      font-style: italic
+    }
+
+    .cos {
+      font-size: .86rem;
+      color: var(--gray);
+      line-height: 1.85;
+      margin-bottom: 36px
+    }
+
+    .cols {
+      display: flex;
+      flex-direction: column;
+      gap: 13px
+    }
+
+    .col {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      font-size: .78rem;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color .3s;
+      letter-spacing: .07em
+    }
+
+    .col:hover {
+      color: var(--off-white)
+    }
+
+    .coli {
+      width: 33px;
+      height: 33px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0
+    }
+
+    .wab {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 26px;
+      background: #22C55E;
+      color: #000;
+      font-family: 'Outfit', sans-serif;
+      font-size: .7rem;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      margin-top: 26px;
+      transition: opacity .3s;
+      cursor: none
+    }
+
+    .wab:hover {
+      opacity: .84
+    }
+
+    .cf {
+      display: flex;
+      flex-direction: column;
+      gap: 17px
+    }
+
+    .fi,
+    .fta {
+      width: 100%;
+      background: var(--off-black);
+      border: 1px solid var(--border);
+      color: var(--off-white);
+      padding: 15px 19px;
+      font-family: 'Outfit', sans-serif;
+      font-size: .83rem;
+      font-weight: 300;
+      outline: none;
+      resize: none;
+      transition: border-color .3s
+    }
+
+    .fi::placeholder,
+    .fta::placeholder {
+      color: rgba(255, 255, 255, .17);
+      font-size: .79rem;
+      letter-spacing: .05em
+    }
+
+    .fi:focus,
+    .fta:focus {
+      border-color: rgba(201, 169, 110, .38)
+    }
+
+    .fta {
+      height: 128px
+    }
+
+    .fsub {
+      padding: 16px;
+      background: var(--off-white);
+      color: #000;
+      border: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: .68rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: none;
+      width: 100%;
+      transition: background .3s, box-shadow .3s
+    }
+
+    .fsub:hover {
+      background: var(--gold);
+      box-shadow: 0 0 26px rgba(201, 169, 110, .18)
+    }
+
+    /* GALLERY CTA */
+    .gcta {
+      text-align: center;
+      padding-top: 44px
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+      padding: 56px 60px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center
+    }
+
+    .fn {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .95rem;
+      letter-spacing: .16em;
+      color: var(--off-white)
+    }
+
+    .fsoc {
+      display: flex;
+      gap: 18px
+    }
+
+    .fsocl {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--lgray);
+      text-decoration: none;
+      transition: border-color .3s, color .3s
+    }
+
+    .fsocl:hover {
+      border-color: var(--gold);
+      color: var(--gold)
+    }
+
+    .fcp {
+      font-size: .63rem;
+      letter-spacing: .13em;
+      color: var(--lgray);
+      text-align: right
+    }
+
+    @media(max-width:1000px) {
+      nav {
+        padding: 19px 24px
+      }
+
+      nav.scrolled {
+        padding: 13px 24px
+      }
+
+      #mob-btn {
+        display: block;
+      }
+
+      .nls {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(4, 6, 12, 0.96);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 0;
+        gap: 30px;
+        border-bottom: 1px solid var(--border);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: all 0.35s ease;
+      }
+
+      nav.menu-open .nls {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .chi {
+        grid-template-columns: 1fr;
+        gap: 38px;
+        padding: 78px 24px
+      }
+
+      .chi.rev {
+        direction: ltr
+      }
+
+      .cva {
+        aspect-ratio: auto;
+      }
+
+      .ag {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .svgg {
+        grid-template-columns: 1fr
+      }
+
+      .tg {
+        grid-template-columns: 1fr
+      }
+
+      .bkg {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      .bkg .bkc {
+        max-width: none;
+      }
+
+      .awg {
+        grid-template-columns: 1fr
+      }
+
+      .cog {
+        grid-template-columns: 1fr
+      }
+
+      .gg {
+        columns: 2;
+        column-gap: 8px;
+      }
+
+      .gi {
+        margin-bottom: 8px;
+        transition: transform 0.3s ease;
+      }
+
+      .ssbi {
+        grid-template-columns: 1fr;
+        gap: 38px
+      }
+
+      .si {
+        padding: 78px 24px
+      }
+
+      footer {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        padding: 38px 24px;
+        text-align: center
+      }
+
+      .fcp {
+        text-align: center
+      }
+
+      .fsoc {
+        justify-content: center
+      }
+
+      .tbi {
+        padding: 22px 26px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="cur"></div>
+  <div id="cur-r"></div>
+  <div id="grain"></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nl">Lt. Col. DD Goel</a>
+    <button id="mob-btn" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M4 7h16M4 12h16M4 17h16"></path>
+      </svg>
+    </button>
+    <ul class="nls" id="nls">
+      <li><a href="#story">Story</a></li>
+      <li><a href="#svc">Services</a></li>
+      <li><a href="https://ddgoel.com/product/ssb-resilience-accelerator/" target="_blank">SSB Course</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#awards">Awards</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#contact">Connect</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <canvas id="sky"></canvas>
+    <div id="pgscene" aria-hidden="true">
+      <div class="pgw" id="pg-bg">
+        <img src="gliding/glider.png" class="wing" alt="">
+        <img src="gliding/pilot.png" class="pilot" alt="">
+      </div>
+      <div class="pgw" id="pg-main">
+        <img src="gliding/glider.png" class="wing" alt="">
+        <img src="gliding/pilot.png" class="pilot" alt="">
+      </div>
+    </div>
+    <div class="hc" id="hc">
+      <span class="hey">Lt. Col. DD Goel — First Amputee Paraglider of India</span>
+      <h1 class="ht">"When people doubted<br>my ability to walk,<br>I decided to <em>fly.</em>"</h1>
+      <p class="hs">War Veteran &nbsp;·&nbsp; Paraglider &nbsp;·&nbsp; Motivational Speaker &nbsp;·&nbsp; Psychologist
+      </p>
+      <div class="hctas">
+        <a href="#contact" class="bp">Book a Talk</a>
+        <a href="#story" class="bg">Watch Story</a>
+      </div>
+    </div>
+    <div class="sh"><span>Scroll</span>
+      <div class="sl"></div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 1 -->
+  <section id="story" class="ch2">
+    <span class="snum">01</span>
+    <div class="chi">
+      <div class="cv vf rl">
+        <img src="images/thefallpic.jpg" class="cva" alt="The Fall">
+      </div>
+      <div>
+        <span class="cn rv">Chapter One</span>
+        <h2 class="ct rv d1">The <em>Fall</em></h2>
+        <span class="tl rv d2"></span>
+        <p class="cb rv d2">On the frontlines, Lt. Col. DD Goel faced what many would call the end — a catastrophic war
+          injury that cost him his leg. A soldier trained to never surrender, he now faced a battle more personal than
+          any he had known.</p>
+        <p class="cb rv d3">The explosion was not the end. It was the beginning of a story the world had never seen
+          before.</p>
+        <blockquote class="cq rv d3">"Losing a limb does not mean losing life. It means learning to live differently —
+          and more fully."</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 2 -->
+  <section class="ch2">
+    <span class="snum">02</span>
+    <div class="chi rev">
+      <div class="cv vs rr">
+        <img src="images/thestruggle.jpg" class="cva" alt="The Struggle">
+      </div>
+      <div>
+        <span class="cn rv">Chapter Two</span>
+        <h2 class="ct rv d1">The <em>Struggle</em></h2>
+        <span class="tl rv d2"></span>
+        <p class="cb rv d2">Rehabilitation was relentless. Days in the hospital turned to weeks, weeks to months. The
+          physical pain was manageable — it was the silence of doubt that demanded the greatest strength.</p>
+        <p class="cb rv d3">But a soldier's spirit doesn't kneel. Every morning he chose to rise — not because it was
+          easy, but because it was necessary.</p>
+        <blockquote class="cq rv d3">"Pain is the tuition fee of transformation. I paid every rupee."</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 3 -->
+  <section class="ch2">
+    <span class="snum">03</span>
+    <div class="chi">
+      <div class="cv vr rl">
+        <img src="images/therise.jpg" class="cva" alt="The Rise">
+      </div>
+      <div>
+        <span class="cn rv">Chapter Three</span>
+        <h2 class="ct rv d1">The <em>Rise</em></h2>
+        <span class="tl rv d2"></span>
+        <p class="cb rv d2">Armed with a Doctorate in Psychology and two decades of military discipline, DD Goel turned
+          his story into science — studying the architecture of resilience, how the mind manufactures meaning even in
+          devastation.</p>
+        <p class="cb rv d3">He began speaking. First to veterans, then to boardrooms, then to stadiums. A TEDx speaker,
+          Limca Book of Records holder, and a counsellor who has transformed thousands.</p>
+        <blockquote class="cq rv d3">"Resilience is not an absence of fear. It is the decision to act while afraid."
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 4 -->
+  <section class="ch2">
+    <span class="snum">04</span>
+    <div class="chi rev">
+      <div class="cv vfl rr">
+        <img src="images/theflight.jpeg" class="cva" alt="The Flight">
+      </div>
+      <div>
+        <span class="cn rv">Chapter Four</span>
+        <h2 class="ct rv d1">The <em>Flight</em></h2>
+        <span class="tl rv d2"></span>
+        <p class="cb rv d2">When he took to the skies of Himachal Pradesh as India's first amputee paraglider, it was
+          not a stunt. It was a declaration — that the human spirit has no altitude limit. The feat earned him a Limca
+          Book of Records entry.</p>
+        <p class="cb rv d3">A man with one leg, two wings, and a message that defies gravity: the only ceiling is the
+          one you accept.</p>
+        <blockquote class="cq rv d3">"At 3,000 feet, I understood — doubt lives below. Freedom lives above."
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="ach">
+    <div class="ag">
+      <div class="ai rv">
+        <div class="an"><span class="count" data-t="500">0</span><sup>+</sup></div>
+        <div class="al">Keynote Talks<br>Delivered</div>
+      </div>
+      <div class="ai rv d1">
+        <div class="an"><span class="count" data-t="2">0</span><sup>M+</sup></div>
+        <div class="al">Lives<br>Impacted</div>
+      </div>
+      <div class="ai rv d2">
+        <div class="an"><span class="count" data-t="22">0</span><sup>yrs</sup></div>
+        <div class="al">Military<br>Service</div>
+      </div>
+      <div class="ai rv d3">
+        <div class="an"><span class="count" data-t="1">0</span><sup>st</sup></div>
+        <div class="al">Amputee Paraglider<br>of India</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="svc">
+    <div class="si">
+      <div class="svch">
+        <span class="sl2 rv">Our Service Offerings</span>
+        <h2 class="pt rv d1">Transforming <em>Audiences</em></h2>
+        <p class="ps rv d2">Customized programs for corporates, universities, schools, defence aspirants and large
+          groups — crafted from lived experience and academic depth.</p>
+      </div>
+      <div class="svgg">
+        <div class="sc rv">
+          <svg class="si2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+            <path d="M2 17l10 5 10-5" />
+            <path d="M2 12l10 5 10-5" />
+          </svg>
+          <h3 class="st">Soft Skills Training</h3>
+          <p class="sd">Customized programs for Corporates, Universities, Schools & Large groups — building
+            communication, confidence and character.</p>
+          <span class="stag">Corporates · Universities · Schools</span>
+        </div>
+        <div class="sc rv d1">
+          <svg class="si2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <rect x="2" y="3" width="20" height="14" rx="2" />
+            <path d="M8 21h8M12 17v4" />
+          </svg>
+          <h3 class="st">Corporate Training</h3>
+          <p class="sd">Comprehensive training in professional skills, leadership, communication and resilience through
+            on-site workshops, virtual classes and blended solutions.</p>
+          <span class="stag">On-site · Virtual · Blended</span>
+        </div>
+        <div class="sc rv d2">
+          <svg class="si2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+          </svg>
+          <h3 class="st">Motivational Talks</h3>
+          <p class="sd">Inspiring and impactful talks derived from real life incidences — to motivate, energize and
+            transform your team or audience.</p>
+          <span class="stag">Keynote · TEDx · Events</span>
+        </div>
+        <div class="sc rv">
+          <svg class="si2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+          </svg>
+          <h3 class="st">Leadership Development</h3>
+          <p class="sd">Tailored workshops to develop leadership skills and empower effective leadership across all
+            levels of an organization.</p>
+          <span class="stag">Workshops · Assessments</span>
+        </div>
+        <div class="sc rv d1">
+          <svg class="si2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path
+              d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
+          </svg>
+          <h3 class="st">Counselling</h3>
+          <p class="sd">Professional support for workplace challenges and team wellbeing. Individual counselling for
+            stress, relationships, self-esteem and life transitions.</p>
+          <span class="stag">Individual · Corporate</span>
+        </div>
+        <a href="https://ddgoel.com/product/ssb-resilience-accelerator/" target="_blank" class="sc rv d2"
+          style="text-decoration: none; cursor: pointer;">
+          <svg class="si2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" />
+            <path d="m12 15-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" />
+          </svg>
+          <h3 class="st">Live SSB Crash Course</h3>
+          <p class="sd">Specialized 7-day comprehensive training addressing the unique psychological aspects of SSB —
+            with limited seats for personal attention.</p>
+          <span class="stag">Online · Limited Seats</span><br>
+          <span
+            style="color:var(--gold); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 15px; display: inline-block;">Enrol
+            Now →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SSB COURSE -->
+  <section id="ssb">
+    <div class="ssbi">
+      <div>
+        <div class="sbadge rv">
+          <div class="sbdot"></div><span>Live SSB Coaching — Online Programme</span>
+        </div>
+        <h2 class="ssbt rv d1">SSB Psychological<br>Test Training — <em>10 Days</em></h2>
+        <p class="ssbb rv d2">Conducted personally by Lt. Col. (Dr) DD Goel — Ex-Instructor at NDA & IMA, Battle
+          Casualty Soldier, Doctorate in Psychology, TEDx Speaker, Limca Book of Records Holder. Limited seats ensure
+          individual attention and maximum impact.</p>
+        <div class="ssbf rv d2">
+          <div class="ssbfr">
+            <div class="ssbfd"></div><span>10 days (Mon–Fri) of live online sessions in evening batches</span>
+          </div>
+          <div class="ssbfr">
+            <div class="ssbfd"></div><span>Personalized Mock Psych Test with evaluation and guidance</span>
+          </div>
+          <div class="ssbfr">
+            <div class="ssbfd"></div><span>Cultivate resilience, leadership &amp; authenticity</span>
+          </div>
+          <div class="ssbfr">
+            <div class="ssbfd"></div><span>Striking balance between SSB strategy &amp; psychological tips</span>
+          </div>
+          <div class="ssbfr">
+            <div class="ssbfd"></div><span>Live Q&amp;A — limited seats for personal attention</span>
+          </div>
+        </div>
+        <div class="ssbpr rv d3">
+          <span class="ssbo">₹6,999</span>
+          <span class="ssbn">₹4,999</span>
+          <span class="ssbpt">Limited Offer</span>
+        </div>
+        <a href="https://ddgoel.com/product/ssb-resilience-accelerator/" target="_blank" class="ssbcta rv d3">Enrol Now
+          — Secure Your Seat</a>
+      </div>
+      <div class="rv d2">
+        <div class="ssbr">
+          <div class="ssbstars">★★★★★</div>
+          <div class="ssbnum">5.0</div>
+          <div class="ssbsub">5 Verified Reviews</div>
+          <div class="ssbrvs">
+            <div class="ssbrv">
+              <p class="ssbrvt">"Training under a war-wounded soldier and TEDx speaker is a different experience. Sir's
+                insights go beyond the exam — they are life lessons."</p>
+              <div class="ssbrva">Akshay · Verified Student</div>
+            </div>
+            <div class="ssbrv">
+              <p class="ssbrvt">"The curriculum is very well structured. The mock test evaluation was spot on. A
+                must-join for serious aspirants."</p>
+              <div class="ssbrva">Vatsal · Verified Student</div>
+            </div>
+            <div class="ssbrv">
+              <p class="ssbrvt">"He teaches you how to project your natural personality. Surprisingly effective for an
+                online course. Highly recommended."</p>
+              <div class="ssbrva">Niharika · Student</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section id="awards">
+    <div class="si">
+      <div class="awh">
+        <span class="sl2 rv">Decorations &amp; Awards</span>
+        <h2 class="pt rv d1">Where Dedication Meets <em>Recognition</em></h2>
+        <p class="ps rv d2">Shining brighter with every triumph — honours earned on the frontlines and beyond.</p>
+      </div>
+      <div class="awg">
+        <div class="awi rv"><svg class="awic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="12" cy="15" r="6" />
+            <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17.4l-6.2 4.5 2.4-7.4L2 9.4h7.6L12 2z" />
+          </svg>
+          <div class="awn">Parakram Padak</div>
+          <div class="awd">War Wounded</div>
+        </div>
+        <div class="awi rv d1"><svg class="awic" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.2">
+            <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17.4l-6.2 4.5 2.4-7.4L2 9.4h7.6L12 2z" />
+          </svg>
+          <div class="awn">Special Service Medal</div>
+          <div class="awd">OP RAKSHAK</div>
+        </div>
+        <div class="awi rv d2"><svg class="awic" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.2">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 6v6l4 2" />
+          </svg>
+          <div class="awn">Operation PARAKRAM</div>
+          <div class="awd">Campaign Medal</div>
+        </div>
+        <div class="awi rv"><svg class="awic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17.4l-6.2 4.5 2.4-7.4L2 9.4h7.6L12 2z" />
+          </svg>
+          <div class="awn">Sainya Seva Medal</div>
+          <div class="awd">Distinguished Service</div>
+        </div>
+        <div class="awi rv d1"><svg class="awic" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.2">
+            <path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3M3 16v3a2 2 0 002 2h3m8 0h3a2 2 0 002-2v-3" />
+          </svg>
+          <div class="awn">High Altitude Medal</div>
+          <div class="awd">Mountain Service</div>
+        </div>
+        <div class="awi rv d2"><svg class="awic" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.2">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 8v4l3 3" />
+          </svg>
+          <div class="awn">75th Independence Anniversary Medal</div>
+          <div class="awd">National Recognition</div>
+        </div>
+        <div class="awi rv"><svg class="awic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+          <div class="awn">20 Years Long Service Medal</div>
+          <div class="awd">Long Service &amp; Good Conduct</div>
+        </div>
+        <div class="awi rv d1"><svg class="awic" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.2">
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+          <div class="awn">09 Years Long Service Medal</div>
+          <div class="awd">Long Service &amp; Good Conduct</div>
+        </div>
+        <div class="awi rv d2"><svg class="awic" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.2">
+            <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
+          </svg>
+          <div class="awn">Chief of Army Staff Commendation</div>
+          <div class="awd">Exceptional Service</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="si">
+      <div class="gh">
+        <span class="sl2 rv">Image Showcase</span>
+        <h2 class="pt rv d1">Gallery <em>Highlights</em></h2>
+        <p class="ps rv d2">Lectures, keynotes, SSB coaching, paragliding achievements, award ceremonies, and moments
+          that define a life lived at full altitude.</p>
+      </div>
+      <div class="gg" id="gg"></div>
+      <div class="gcta rv d3">
+        <a href="gallery.html" class="bp" style="cursor:none;display:inline-block">View Full Gallery →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testi">
+    <div class="si">
+      <span class="sl2 rv">Testimonials</span>
+      <h2 class="pt rv d1">What They <em>Say</em></h2>
+      <div class="tg">
+        <div class="tc rv">
+          <p class="tt">A perfect example of the battle casualty who does what he loves. An icon for the youth of India
+            to follow if they want their dreams to come true.</p>
+          <div class="ta">Maj Gen Ian Cardozo, AVSM, SM (Retd)</div>
+          <div class="tr">1971 War Veteran</div>
+        </div>
+        <div class="tc rv d1">
+          <p class="tt">Despite being an amputee he set standards of excellence in endurance and adventure. He can teach
+            us to make our lives sublime.</p>
+          <div class="ta">Lt. Gen. Vinod Vashisht (Retd)</div>
+          <div class="tr">Ex Director General NCC</div>
+        </div>
+        <div class="tc rv d2">
+          <p class="tt">DD Goel is a living example of the power of the human spirit. A reminder that ANYTHING IS
+            POSSIBLE — he continues to inspire with his story.</p>
+          <div class="ta">Mr. Rajan Arya</div>
+          <div class="tr">Director, Pentagon Press LLP</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUSTED BY -->
+  <section id="trusted">
+    <div class="si" style="padding-top:78px;padding-bottom:78px">
+      <div class="tbh rv"><span class="tbhl">Trusted By</span></div>
+      <style>
+        .tb-logo {
+          max-height: 100px;
+          max-width: 240px;
+          width: 100%;
+          object-fit: contain;
+          filter: grayscale(1) opacity(0.7);
+          transition: filter 0.3s ease, opacity 0.3s ease;
+        }
+        .tbi:hover .tb-logo {
+          filter: grayscale(0) opacity(1);
+        }
+      </style>
+      <div class="tbg rv d1">
+        <div class="tbi">
+          <img src="images/Tata_logo.svg" alt="TATA GROUP" class="tb-logo">
+        </div>
+        <div class="tbi">
+          <img src="images/MERCEDESLOGO.png" alt="MERCEDES-BENZ" class="tb-logo">
+        </div>
+        <div class="tbi">
+          <img src="images/OILLOGOWITHBACKGROUND.png" alt="OIL INDIA LIMITED" class="tb-logo">
+        </div>
+        <div class="tbi">
+          <img src="images/ADITYA BIRLA GROUP.jpeg" alt="ADITYA BIRLA GROUP" class="tb-logo">
+        </div>
+        <div class="tbi">
+          <img src="images/poonawalla-fincorp.avif" alt="POONAWALLA FINCORP" class="tb-logo">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKS -->
+  <section id="books">
+    <div class="si">
+      <div class="bkh">
+        <span class="sl2 rv">Popular Book Picks</span>
+        <h2 class="pt rv d1">Best Selling <em>Books</em></h2>
+        <p class="ps rv d2">Words forged from lived experience — each book a guide to resilience, purpose and
+          extraordinary living.</p>
+      </div>
+      <div class="bkg">
+
+        <!-- Book 1 (Featured) -->
+        <div class="bkc rv" id="bk1">
+          <div class="bkcov" style="background:#0a0a0a;">
+            <img src="images/magicofsowhat.jpg" alt="The Magic of So What"
+              style="width:100%; height:100%; object-fit:cover; object-position: top;">
+          </div>
+          <div class="bkn">The Magic of So What</div>
+          <div class="bkm">Life Lessons</div>
+          <a href="https://www.amazon.in/Magic-What-Col-Goel-Retd/dp/B0GDV897DS/" target="_blank" class="bkbuy">Buy Now
+            →</a>
+        </div>
+
+        <!-- Book 2 -->
+        <div class="bkc rv d1" id="bk2">
+          <div class="bkcov" style="background:#0a0a0a;">
+            <img src="images/fulls/whenpeopledoubtedbook.jpg" alt="When People Doubted My Ability"
+              style="width:100%; height:100%; object-fit:cover; object-position: top;">
+          </div>
+          <div class="bkn">When People Doubted...</div>
+          <div class="bkm">English Edition</div>
+          <a href="https://www.amazon.in/When-People-Doubted-Ability-Decided/dp/9386618834" target="_blank"
+            class="bkbuy">Buy Now →</a>
+        </div>
+
+        <!-- Book 3 -->
+        <div class="bkc rv d2" id="bk3">
+          <div class="bkcov" style="background:#0a0a0a;">
+            <img src="images/hosleudaanki.jpg" alt="Udaan Haunsalon Ki"
+              style="width:100%; height:100%; object-fit:cover; object-position: top;">
+          </div>
+          <div class="bkn">Udaan Haunsalon Ki</div>
+          <div class="bkm">Hindi Edition</div>
+          <a href="https://www.amazon.in/Udaan-Haunsalon-Ki-Jaabaz-Jeevani/dp/9390095336" target="_blank"
+            class="bkbuy">Buy Now →</a>
+        </div>
+
+        <!-- Book 4 -->
+        <div class="bkc rv d3" id="bk4">
+          <div class="bkcov" style="background:#0a0a0a;">
+            <img src="images/marathibook.jpg" alt="Marathi Edition"
+              style="width:100%; height:100%; object-fit:cover; object-position: top;">
+          </div>
+          <div class="bkn">Wings of Will</div>
+          <div class="bkm">Marathi Edition</div>
+          <a href="https://www.amazon.in/dp/B0C4DN1JMT" target="_blank" class="bkbuy">Buy Now →</a>
+        </div>
+
+        <!-- Book 5 -->
+        <div class="bkc rv d4" id="bk5">
+          <div class="bkcov" style="background:#0a0a0a;">
+            <img src="images/gujaratibook.jpg" alt="Challenge To Change"
+              style="width:100%; height:100%; object-fit:cover; object-position: top;">
+          </div>
+          <div class="bkn">Challenge To Change</div>
+          <div class="bkm">Gujarati Edition</div>
+          <a href="https://pravinprakashan.com/book/challenge-thi-change-sudhi/" target="_blank" class="bkbuy">Buy Now
+            →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="si">
+      <div class="cog">
+        <div>
+          <span class="sl2 rv">Book a Talk</span>
+          <h2 class="cot rv d1">Let's Create Something <em>Unforgettable</em></h2>
+          <p class="cos rv d2">For speaking engagements, corporate programs, SSB coaching, and collaborations — connect
+            directly. Every inquiry is a conversation, every event a story worth telling.</p>
+          <div class="cols rv d3">
+            <a href="mailto:drddgoel@gmail.com" class="col">
+              <div class="coli"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.5">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg></div>drddgoel@gmail.com
+            </a>
+            <a href="tel:+919765911024" class="col">
+              <div class="coli"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.5">
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.22 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z" />
+                </svg></div>+91 97659 11024
+            </a>
+            <a href="https://www.instagram.com/lt.col.ddgoel/" target="_blank" class="col">
+              <div class="coli"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.5">
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg></div>@lt.col.ddgoel
+            </a>
+          </div>
+          <a href="https://wa.me/919765911024" target="_blank" class="wab rv d4"><svg width="16" height="16"
+              viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>Chat on WhatsApp</a>
+        </div>
+        <div class="cf rv d2">
+          <input type="text" class="fi" placeholder="Your Name" />
+          <input type="email" class="fi" placeholder="Email Address" />
+          <input type="text" class="fi" placeholder="Organisation / Event Type" />
+          <textarea class="fta" placeholder="Tell me about your event and what you're hoping to achieve..."></textarea>
+          <button class="fsub">Send Enquiry</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fn">Lt. Col. (Dr) DD Goel</div>
+    <div class="fsoc">
+      <a href="https://www.linkedin.com/in/lt-col-dr-dharamdatt-goel-military-veteran-770a9627a/" target="_blank"
+        class="fsocl"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+          <circle cx="4" cy="4" r="2" />
+        </svg></a>
+      <a href="https://www.instagram.com/lt.col.ddgoel/" target="_blank" class="fsocl"><svg width="13" height="13"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="2" width="20" height="20" rx="5" />
+          <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+        </svg></a>
+      <a href="https://www.facebook.com/skyiscalling/" target="_blank" class="fsocl"><svg width="13" height="13"
+          viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+        </svg></a>
+      <a href="https://x.com/dd_goel" target="_blank" class="fsocl"><svg width="13" height="13" viewBox="0 0 24 24"
+          fill="currentColor">
+          <path
+            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.736-8.834L1.254 2.25H8.08l4.264 5.636L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg></a>
+    </div>
+    <div class="fcp">© 2026 — When the world doubted, he flew.</div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" role="dialog" aria-label="Image viewer">
+    <button id="lb-close" onclick="closeLb()">✕ Close</button>
+    <img id="lb-img" src="" alt="Gallery Image">
+    <video id="lb-vid" src="" controls playsinline></video>
+  </div>
+
+  <script>
+    /* CURSOR */
+    const curEl = document.getElementById('cur'), ringEl = document.getElementById('cur-r');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY });
+    (function animC() { curEl.style.cssText = `left:${mx}px;top:${my}px`; rx += (mx - rx) * .11; ry += (my - ry) * .11; ringEl.style.cssText = `left:${rx}px;top:${ry}px`; requestAnimationFrame(animC) })();
+    document.querySelectorAll('a,button,.sc,.awi,.gi,.bkc,.tc,.tbi').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('ch'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('ch'));
+    });
+
+    /* SKY CANVAS */
+    const skyC = document.getElementById('sky'), sCtx = skyC.getContext('2d');
+    function rng(s) { return () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296 } }
+    function drawSky() {
+      const w = skyC.width, h = skyC.height;
+      const g = sCtx.createLinearGradient(0, 0, 0, h);
+      g.addColorStop(0, '#000'); g.addColorStop(.26, '#060810'); g.addColorStop(.55, '#0c1020'); g.addColorStop(.8, '#070608'); g.addColorStop(1, '#000');
+      sCtx.fillStyle = g; sCtx.fillRect(0, 0, w, h);
+      const hg = sCtx.createRadialGradient(w / 2, h * .56, 0, w / 2, h * .56, w * .72);
+      hg.addColorStop(0, 'rgba(160,140,100,.05)'); hg.addColorStop(1, 'transparent');
+      sCtx.fillStyle = hg; sCtx.fillRect(0, 0, w, h);
+      const r = rng(99);
+      for (let i = 0; i < 280; i++) { const x = r() * w, y = r() * h * .65, rad = r() * 1.2, a = .07 + r() * .38; sCtx.beginPath(); sCtx.arc(x, y, rad, 0, Math.PI * 2); sCtx.fillStyle = `rgba(255,255,248,${a})`; sCtx.fill(); }
+    }
+    function resizeSky() { skyC.width = window.innerWidth; skyC.height = window.innerHeight; drawSky(); }
+    window.addEventListener('resize', resizeSky); resizeSky();
+
+    /* NAV */
+    const navEl = document.getElementById('nav');
+    const mobBtn = document.getElementById('mob-btn');
+    window.addEventListener('scroll', () => navEl.classList.toggle('scrolled', scrollY > 60));
+
+    if (mobBtn) {
+      mobBtn.addEventListener('click', () => { navEl.classList.toggle('menu-open') });
+      document.querySelectorAll('.nls a').forEach(l => l.addEventListener('click', () => navEl.classList.remove('menu-open')));
+    }
+
+    /* PARALLAX — hero text */
+    const hcEl = document.getElementById('hc');
+    window.addEventListener('scroll', () => {
+      const sy = window.scrollY;
+      if (hcEl) hcEl.style.transform = `translateY(${sy * .26}px)`;
+    }, { passive: true });
+
+    /* REVEAL */
+    const rvObs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis') }) }, { threshold: .08 });
+    document.querySelectorAll('.rv,.rl,.rr').forEach(el => rvObs.observe(el));
+
+    /* COUNTERS */
+    const ctObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !e.target.dataset.done) {
+          e.target.dataset.done = '1';
+          const tgt = +e.target.dataset.t, dur = 2000, s = performance.now();
+          (function u(now) {
+            const p = Math.min((now - s) / dur, 1), ease = 1 - Math.pow(1 - p, 4);
+            e.target.textContent = Math.floor(ease * tgt); if (p < 1) requestAnimationFrame(u); else e.target.textContent = tgt;
+          })(performance.now());
+        }
+      });
+    }, { threshold: .5 });
+    document.querySelectorAll('.count').forEach(el => ctObs.observe(el));
+
+    /* CHAPTER ART REPLACED WITH STATIC IMAGES */
+    /* GALLERY */
+    const gallData = [
+      { label: 'Keynote Lecture', src: 'images/fulls/lecture9.JPG', wide: true },
+      { label: 'Paragliding', src: 'images/fulls/paragliding.MOV' },
+      { label: 'Marathon Finish', src: 'images/fulls/marathonfinishpic.jpg' },
+      { label: 'Press & Media', src: 'images/fulls/news2.jpeg' },
+      { label: 'Limca Records', src: 'images/fulls/limca.jpg', tall: true },
+      { label: 'Training Session', src: 'images/fulls/training.jpg' },
+      { label: 'NDA Service', src: 'images/fulls/NDAStandingpic.jpg' },
+      { label: 'Honours', src: 'images/fulls/gettingmedal.png', wide: true },
+      { label: 'Motivational Speaking', src: 'images/fulls/lecture4.jpg' },
+      { label: 'Winter Sports', src: 'images/fulls/skiing.jpg' },
+      { label: 'Marathon Challenge', src: 'images/fulls/marathon4.jpg' },
+      { label: 'Press Coverage', src: 'images/fulls/news3.jpeg' }
+    ];
+
+    const ggEl = document.getElementById('gg');
+    gallData.forEach((item, i) => {
+      const div = document.createElement('div');
+      div.className = 'gi rv';
+      div.style.transitionDelay = (i % 4) * .07 + 's';
+
+      const isVid = /\.(mp4|mov|webm)$/i.test(item.src);
+      const mediaTag = isVid
+        ? `<video src="${item.src}" muted loop playsinline autoplay style="width:100%; height:auto; display:block; filter:brightness(.88); pointer-events:none;"></video>`
+        : `<img src="${item.src}" alt="${item.label}" loading="lazy" style="width:100%; height:auto; display:block;">`;
+
+      div.innerHTML = `<div class="ga">${mediaTag}</div><div class="gov"><span class="glab">${item.label}</span></div>`;
+      div.onclick = () => openLb(item.src, isVid);
+      ggEl.appendChild(div);
+      rvObs.observe(div);
+    });
+
+    /* HOMEPAGE LIGHTBOX LOGIC */
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbVid = document.getElementById('lb-vid');
+
+    window.openLb = function (src, isVid) {
+      if (isVid) {
+        lbImg.style.display = 'none';
+        lbVid.style.display = 'block';
+        lbVid.src = src;
+        lbVid.play();
+      } else {
+        lbVid.style.display = 'none';
+        lbVid.pause();
+        lbImg.style.display = 'block';
+        lbImg.src = src;
+      }
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    };
+
+    window.closeLb = function () {
+      lb.classList.remove('active');
+      lbVid.pause();
+      document.body.style.overflow = '';
+    };
+
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('active')) closeLb(); });
+
+    /* BOOK TILT */
+    document.querySelectorAll('.bkc').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const cx = (e.clientX - r.left) / r.width - .5, cy = (e.clientY - r.top) / r.height - .5;
+        card.style.cssText = `transform:perspective(540px) rotateY(${cx * 14}deg) rotateX(${-cy * 10}deg) scale(1.03);transition:transform .08s ease`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.cssText = 'transform:perspective(540px) rotateY(0) rotateX(0) scale(1);transition:transform .65s cubic-bezier(.25,1,.5,1)' });
+    });
+
+    /* PARAGLIDER JS FLIGHT LOOP */
+    const pgMain = document.getElementById('pg-main');
+    const pgBg = document.getElementById('pg-bg');
+
+    const gliders = [
+      {
+        el: pgMain,
+        x: window.innerWidth + 20, // enter almost immediately
+        speedX: 0.6,
+        baseY: window.innerHeight * 0.15, // top-right area
+        yAmp: 30, // vertical drift amount
+        yFreq: 0.0007, // curve speed
+        time: 0,
+        scale: 1,
+        parallaxOffset: 0,
+        parallaxFactor: 0.15
+      },
+      {
+        el: pgBg,
+        x: window.innerWidth + 150, // slow background glider follows shortly after
+        speedX: 0.35,
+        baseY: window.innerHeight * 0.25,
+        yAmp: 20,
+        yFreq: 0.0004,
+        time: Math.PI, // offset sine phase so they don't sync
+        scale: 0.8,
+        parallaxOffset: 0,
+        parallaxFactor: 0.05
+      }
+    ];
+
+    let lastTime = performance.now();
+    function animateGliders(now) {
+      const dt = now - lastTime;
+      lastTime = now;
+      const currentScrollY = window.scrollY;
+
+      gliders.forEach(g => {
+        if (!g.el) return;
+
+        // Loop when off screen left
+        if (g.x < -300) {
+          g.x = window.innerWidth + 50 + Math.random() * 200; // shorter delay between loops
+          g.baseY = window.innerHeight * (0.1 + Math.random() * 0.2);
+        }
+
+        g.time += dt;
+
+        // Organic thermal drift (complex wave)
+        const wave1 = Math.sin(g.time * g.yFreq);
+        const wave2 = Math.sin(g.time * g.yFreq * 2.3);
+        const organicVal = wave1 + (wave2 * 0.25);
+
+        const yOffset = organicVal * g.yAmp;
+        const currentY = g.baseY + yOffset;
+
+        // Slope = derivative of combined wave
+        const dWave1 = Math.cos(g.time * g.yFreq) * g.yFreq;
+        const dWave2 = Math.cos(g.time * g.yFreq * 2.3) * (g.yFreq * 2.3);
+        const slopeDeriv = dWave1 + (dWave2 * 0.25);
+
+        // Normalize slope for calculating rotation
+        const slope = slopeDeriv * g.yAmp;
+
+        // Tilt based on slope. Negative slope = climbing up = rotation leans back
+        const rotation = -slope * 20;
+
+        // Adjust speed based on climb/descend
+        const speedVar = slope * 5;
+        g.x -= (g.speedX + speedVar) * (dt / 16.6); // normalize step to 60fps
+
+        // Parallax - smoothly transition to scroll target without freezing logic
+        const targetParallax = currentScrollY * g.parallaxFactor;
+        g.parallaxOffset += (targetParallax - g.parallaxOffset) * 0.1;
+
+        // Apply physics to DOM
+        g.el.style.transform = `translate3d(${g.x}px, ${currentY - g.parallaxOffset}px, 0) scale(${g.scale}) rotate(${rotation}deg)`;
+      });
+
+      requestAnimationFrame(animateGliders);
+    }
+
+    // Update base heights dynamically on resize
+    window.addEventListener('resize', () => {
+      if (gliders[0]) gliders[0].baseY = window.innerHeight * 0.15;
+      if (gliders[1]) gliders[1].baseY = window.innerHeight * 0.25;
+    });
+
+    requestAnimationFrame(animateGliders);
+
+  </script>
+</body>
+
+</html>

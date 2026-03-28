@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery — Lt. Col. DD Goel</title>
+    <meta name="description"
+        content="Full photo gallery of Lt. Col. DD Goel — keynotes, paragliding, awards, SSB coaching, and moments of a life lived at full altitude.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --black: #000;
+            --off-black: #050505;
+            --deep: #0a0a0a;
+            --surface: #111;
+            --border: rgba(255, 255, 255, 0.07);
+            --white: #fff;
+            --off-white: #f0ede8;
+            --gray: #888;
+            --lgray: #555;
+            --gold: #c9a96e;
+            --gold-dim: rgba(201, 169, 110, 0.12);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden
+        }
+
+        body {
+            background: var(--black);
+            color: var(--off-white);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            cursor: none;
+            overflow-x: hidden
+        }
+
+        /* CURSOR */
+        #cur {
+            position: fixed;
+            width: 9px;
+            height: 9px;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference
+        }
+
+        #cur-r {
+            position: fixed;
+            width: 34px;
+            height: 34px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width .3s, height .3s, border-color .3s
+        }
+
+        .ch #cur-r {
+            width: 52px;
+            height: 52px;
+            border-color: var(--gold)
+        }
+
+        /* GRAIN */
+        #grain {
+            position: fixed;
+            inset: -200%;
+            width: 400%;
+            height: 400%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: .024;
+            pointer-events: none;
+            z-index: 9990;
+            animation: gm 8s steps(10) infinite
+        }
+
+        @keyframes gm {
+
+            0%,
+            100% {
+                transform: translate(0, 0)
+            }
+
+            10% {
+                transform: translate(-3%, -3%)
+            }
+
+            20% {
+                transform: translate(2%, 2%)
+            }
+
+            30% {
+                transform: translate(-1%, 3%)
+            }
+
+            40% {
+                transform: translate(3%, -1%)
+            }
+
+            50% {
+                transform: translate(-2%, 2%)
+            }
+
+            60% {
+                transform: translate(1%, -2%)
+            }
+
+            70% {
+                transform: translate(-3%, 1%)
+            }
+
+            80% {
+                transform: translate(2%, -3%)
+            }
+
+            90% {
+                transform: translate(-1%, 2%)
+            }
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 26px 60px;
+            transition: background .5s, padding .4s;
+            background: rgba(0, 0, 0, .92);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            border-bottom: 1px solid var(--border)
+        }
+
+        .nl {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 300;
+            letter-spacing: .22em;
+            color: var(--off-white);
+            text-decoration: none;
+            text-transform: uppercase
+        }
+
+        .nls {
+            display: flex;
+            gap: 38px;
+            list-style: none;
+            align-items: center
+        }
+
+        .nls a {
+            font-size: .66rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gray);
+            text-decoration: none;
+            transition: color .3s;
+            font-weight: 400
+        }
+
+        .nls a:hover {
+            color: var(--off-white)
+        }
+
+        .back-btn {
+            font-size: .66rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 400;
+            border: 1px solid rgba(201, 169, 110, .28);
+            padding: 8px 18px;
+            transition: border-color .3s, background .3s
+        }
+
+        .back-btn:hover {
+            border-color: var(--gold);
+            background: rgba(201, 169, 110, .08)
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            padding: 140px 60px 70px;
+            text-align: center;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .ph-label {
+            font-size: .6rem;
+            letter-spacing: .38em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 400;
+            margin-bottom: 20px;
+            display: block
+        }
+
+        .ph-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 5vw, 4.4rem);
+            font-weight: 300;
+            line-height: 1.15;
+            color: var(--off-white);
+            margin-bottom: 16px
+        }
+
+        .ph-title em {
+            font-style: italic;
+            color: var(--gold)
+        }
+
+        .ph-sub {
+            font-size: .8rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: rgba(240, 237, 232, .38);
+            font-weight: 300
+        }
+        /* FILTERS */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        .fb {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--gray);
+            font-family: 'Outfit', sans-serif;
+            font-size: .65rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            padding: 10px 22px;
+            cursor: none;
+            transition: all 0.3s;
+            border-radius: 40px;
+        }
+        .fb:hover {
+            border-color: rgba(201, 169, 110, .5);
+            color: var(--off-white);
+        }
+        .fb.active {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(201, 169, 110, 0.08);
+        }
+
+        /* MASONRY GRID */
+        .gallery-section {
+            padding: 70px 48px 100px;
+            max-width: 1400px;
+            margin: 0 auto
+        }
+
+        .masonry {
+            columns: 4;
+            column-gap: 10px
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+            cursor: none;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .masonry-item.hidden {
+            display: none;
+        }
+
+        .masonry-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform .7s ease, filter .5s ease;
+            filter: brightness(.88)
+        }
+
+        .masonry-item:hover img {
+            transform: scale(1.05);
+            filter: brightness(1)
+        }
+
+        .masonry-item .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0);
+            transition: background .4s;
+            display: flex;
+            align-items: flex-end;
+            padding: 18px;
+            z-index: 2
+        }
+
+        .masonry-item:hover .overlay {
+            background: rgba(0, 0, 0, .44)
+        }
+
+        .masonry-item .img-label {
+            font-size: .58rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0);
+            transition: color .4s
+        }
+
+        .masonry-item:hover .img-label {
+            color: rgba(255, 255, 255, .7)
+        }
+
+        /* LIGHTBOX */
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: rgba(0, 0, 0, .96);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .4s ease
+        }
+
+        #lightbox.active {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        #lightbox img {
+            max-width: 90vw;
+            max-height: 88vh;
+            object-fit: contain;
+            border: 1px solid var(--border)
+        }
+
+        #lb-close {
+            position: absolute;
+            top: 28px;
+            right: 36px;
+            font-size: .66rem;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--gray);
+            cursor: none;
+            transition: color .2s;
+            background: none;
+            border: none;
+            font-family: 'Outfit', sans-serif
+        }
+
+        #lb-close:hover {
+            color: var(--off-white)
+        }
+
+        #lb-prev,
+        #lb-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--gray);
+            cursor: none;
+            font-family: 'Outfit', sans-serif;
+            font-size: .66rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            padding: 11px 18px;
+            transition: border-color .2s, color .2s
+        }
+
+        #lb-prev {
+            left: 28px
+        }
+
+        #lb-next {
+            right: 28px
+        }
+
+        #lb-prev:hover,
+        #lb-next:hover {
+            border-color: var(--gold);
+            color: var(--gold)
+        }
+
+        #lb-counter {
+            position: absolute;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: .6rem;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--lgray)
+        }
+
+        /* BACK TO HOME BOTTOM */
+        .bottom-nav {
+            text-align: center;
+            padding: 0 0 80px;
+            border-top: 1px solid var(--border);
+            padding-top: 60px
+        }
+
+        .home-link {
+            display: inline-block;
+            padding: 13px 36px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--gray);
+            font-family: 'Outfit', sans-serif;
+            font-size: .69rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            font-weight: 400;
+            cursor: none;
+            text-decoration: none;
+            transition: border-color .3s, color .3s
+        }
+
+        .home-link:hover {
+            border-color: var(--gold);
+            color: var(--gold)
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:1100px) {
+            .masonry {
+                columns: 3
+            }
+        }
+
+        @media(max-width:768px) {
+            nav {
+                padding: 16px 24px
+            }
+
+            .nls {
+                display: none
+            }
+
+            .page-header {
+                padding: 110px 24px 50px
+            }
+
+            .gallery-section {
+                padding: 44px 14px 70px;
+                max-width: 100%
+            }
+
+            .masonry {
+                columns: 2;
+                column-gap: 7px
+            }
+
+            .masonry-item {
+                margin-bottom: 7px
+            }
+        }
+
+        @media(max-width:480px) {
+            .masonry {
+                columns: 1
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cur"></div>
+    <div id="cur-r"></div>
+    <div id="grain"></div>
+
+    <!-- NAV -->
+    <nav id="nav">
+        <a href="index.html" class="nl">Lt. Col. DD Goel</a>
+        <ul class="nls">
+            <li><a href="index.html#story">Story</a></li>
+            <li><a href="index.html#svc">Services</a></li>
+            <li><a href="index.html#contact">Connect</a></li>
+            <li><a href="index.html" class="back-btn">← Back to Home</a></li>
+        </ul>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <span class="ph-label">Image Showcase</span>
+        <h1 class="ph-title">The Full <em>Gallery</em></h1>
+        <p class="ph-sub">A life lived at full altitude &nbsp;·&nbsp; Every frame a chapter</p>
+    </div>
+
+    <!-- MASONRY GALLERY -->
+    <section class="gallery-section">
+        <div class="filters">
+            <button class="fb active" data-cat="all">All</button>
+            <button class="fb" data-cat="speak">Speaking & Keynotes</button>
+            <button class="fb" data-cat="adventure">Adventure & Sports</button>
+            <button class="fb" data-cat="press">Press & Honours</button>
+            <button class="fb" data-cat="moments">Moments & Action</button>
+        </div>
+        <div class="masonry" id="masonry"></div>
+    </section>
+
+    <!-- BACK TO HOME -->
+    <div class="bottom-nav">
+        <a href="ddgoel-portfolio-v2.html" class="home-link">← Back to Home</a>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" role="dialog" aria-label="Image viewer">
+        <button id="lb-close">✕ &nbsp;Close</button>
+        <button id="lb-prev">← Prev</button>
+        <img id="lb-img" src="" alt="Gallery image">
+        <video id="lb-vid" src="" controls playsinline style="display:none; max-width: 90vw; max-height: 88vh;"></video>
+        <button id="lb-next">Next →</button>
+        <div id="lb-counter"></div>
+    </div>
+
+    <script>
+        /* CURSOR */
+        const curEl = document.getElementById('cur'), ringEl = document.getElementById('cur-r');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY });
+        (function animC() { curEl.style.cssText = `left:${mx}px;top:${my}px`; rx += (mx - rx) * .11; ry += (my - ry) * .11; ringEl.style.cssText = `left:${rx}px;top:${ry}px`; requestAnimationFrame(animC) })();
+
+        /* GALLERY DATA — real images from /images */
+        const imgs = [
+            { src: 'images/fulls/IMG_3122.JPG.jpeg', label: 'Moments & Action', cat: 'moments' },
+            { src: 'images/fulls/IMG_3234.JPG.jpeg', label: 'Moments & Action', cat: 'moments' },
+            { src: 'images/fulls/NDAStandingpic.jpg', label: 'NDA Service', cat: 'speak' },
+            { src: 'images/fulls/bikeride.jpg', label: 'Adventure Ride', cat: 'adventure' },
+            { src: 'images/fulls/bikeride2.jpg', label: 'Adventure Ride', cat: 'adventure' },
+            { src: 'images/fulls/book1.jpg', label: 'Book Event', cat: 'speak' },
+            { src: 'images/fulls/book3.jpg', label: 'Book Event', cat: 'speak' },
+            { src: 'images/fulls/bookrelease.jpg', label: 'Book Event', cat: 'speak' },
+            { src: 'images/fulls/bookrelease2.jpg', label: 'Book Event', cat: 'speak' },
+            { src: 'images/fulls/gal1.JPG', label: 'Moments & Action', cat: 'moments' },
+            { src: 'images/fulls/gal10.JPG', label: 'Moments & Action', cat: 'moments' },
+            { src: 'images/fulls/gal11.JPG', label: 'Moments & Action', cat: 'moments' },
+            { src: 'images/fulls/gal12.JPG', label: 'Moments & Action', cat: 'moments' },
+            { src: 'images/fulls/gettingmedal.png', label: 'Honours', cat: 'press' },
+            { src: 'images/fulls/lectuew.jpg', label: 'NDA Service', cat: 'speak' },
+            { src: 'images/fulls/lecture.JPG', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/lecture.MOV', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/lecture11.jpg', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/lecture13.jpeg', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/lecture14.JPG', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/lecture14.jpeg', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/lecture15.JPG', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/lecture16.JPG', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/lecture17.JPG', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/lecture2.jpg', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/lecture4.jpg', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/lecture5.jpg', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/lecture6.jpeg', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/lecture7.jpeg', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/lecture8.jpg', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/lecture9.JPG', label: 'Speaking & Keynotes', cat: 'speak' },
+            { src: 'images/fulls/limca.jpg', label: 'Honours', cat: 'press' },
+            { src: 'images/fulls/main27.jpg', label: 'Moments & Action', cat: 'moments' },
+            { src: 'images/fulls/mainff3.jpg', label: 'Moments & Action', cat: 'moments' },
+            { src: 'images/fulls/marathon10.jpg', label: 'Marathon', cat: 'adventure' },
+            { src: 'images/fulls/marathon3.jpg', label: 'Marathon', cat: 'adventure' },
+            { src: 'images/fulls/marathon4.jpg', label: 'Marathon', cat: 'adventure' },
+            { src: 'images/fulls/marathon7.jpeg', label: 'Marathon', cat: 'adventure' },
+            { src: 'images/fulls/marathonfinishpic.jpg', label: 'Marathon', cat: 'adventure' },
+            { src: 'images/fulls/marathonrunning.jpg', label: 'Marathon', cat: 'adventure' },
+            { src: 'images/fulls/news1.jpeg', label: 'Press & Media', cat: 'press' },
+            { src: 'images/fulls/news10.jpeg', label: 'Press & Media', cat: 'press' },
+            { src: 'images/fulls/news11.jpeg', label: 'Press & Media', cat: 'press' },
+            { src: 'images/fulls/news2.jpeg', label: 'Press & Media', cat: 'press' },
+            { src: 'images/fulls/news3.jpeg', label: 'Press & Media', cat: 'press' },
+            { src: 'images/fulls/news4.jpeg', label: 'Press & Media', cat: 'press' },
+            { src: 'images/fulls/news5.jpeg', label: 'Press & Media', cat: 'press' },
+            { src: 'images/fulls/news6.jpeg', label: 'Press & Media', cat: 'press' },
+            { src: 'images/fulls/news7.jpeg', label: 'Press & Media', cat: 'press' },
+            { src: 'images/fulls/news8.jpeg', label: 'Press & Media', cat: 'press' },
+            { src: 'images/fulls/news9.jpeg', label: 'Press & Media', cat: 'press' },
+            { src: 'images/fulls/paragliding.MOV', label: 'Paragliding', cat: 'adventure' },
+            { src: 'images/fulls/paragliding2.jpg', label: 'Paragliding', cat: 'adventure' },
+            { src: 'images/fulls/paragliding4.jpeg', label: 'Paragliding', cat: 'adventure' },
+            { src: 'images/fulls/running1.jpg', label: 'Training', cat: 'adventure' },
+            { src: 'images/fulls/skiing.jpeg', label: 'Winter Sports', cat: 'adventure' },
+            { src: 'images/fulls/skiing.jpg', label: 'Winter Sports', cat: 'adventure' },
+            { src: 'images/fulls/thefallpic.jpg', label: 'Moments & Action', cat: 'moments' },
+            { src: 'images/fulls/theflight.jpeg', label: 'Paragliding', cat: 'adventure' },
+            { src: 'images/fulls/theflight1.jpeg', label: 'Paragliding', cat: 'adventure' },
+            { src: 'images/fulls/thestruggle.jpg', label: 'Moments & Action', cat: 'moments' },
+            { src: 'images/fulls/training.jpg', label: 'Training', cat: 'adventure' },
+            { src: 'images/fulls/video5.mp4', label: 'Highlight Reel', cat: 'moments' },
+            { src: 'images/fulls/video6.mov', label: 'Highlight Reel', cat: 'moments' },
+            { src: 'images/fulls/video6.mp4', label: 'Highlight Reel', cat: 'moments' },
+        ];
+
+        /* BUILD MASONRY */
+        const masonry = document.getElementById('masonry');
+        imgs.forEach((item, i) => {
+            const wrap = document.createElement('div');
+            wrap.className = 'masonry-item';
+            wrap.dataset.index = i;
+            wrap.dataset.cat = item.cat;
+            
+            const isVid = /\.(mp4|mov|webm)$/i.test(item.src);
+            const mediaTag = isVid 
+              ? `<video src="${item.src}" muted loop playsinline autoplay style="width:100%; height:auto; display:block; filter:brightness(.88); transition: filter .5s"></video>`
+              : `<img src="${item.src}" alt="${item.label}" loading="lazy">`;
+              
+            wrap.innerHTML = `
+    ${mediaTag}
+    <div class="overlay"><span class="img-label">${item.label}</span></div>
+  `;
+            wrap.addEventListener('click', () => openLightbox(i));
+            masonry.appendChild(wrap);
+        });
+
+        /* FILTER LOGIC */
+        const fbs = document.querySelectorAll('.fb');
+        const items = document.getElementsByClassName('masonry-item');
+        let activeCatFilter = 'all';
+
+        fbs.forEach(btn => {
+            btn.addEventListener('click', () => {
+                fbs.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeCatFilter = btn.dataset.cat;
+                
+                Array.from(items).forEach(el => {
+                    if (activeCatFilter === 'all' || el.dataset.cat === activeCatFilter) {
+                        el.classList.remove('hidden');
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        /* Cursor hover states */
+        document.querySelectorAll('.fb,.masonry-item,.home-link,.back-btn,.nl,.nls a,#lb-close,#lb-prev,#lb-next').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('ch'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('ch'));
+        });
+
+        /* LIGHTBOX */
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lb-img');
+        const lbVid = document.getElementById('lb-vid');
+        const lbCounter = document.getElementById('lb-counter');
+        const lbClose = document.getElementById('lb-close');
+        const lbPrev = document.getElementById('lb-prev');
+        const lbNext = document.getElementById('lb-next');
+        let currentIdx = 0;
+
+        function openLightbox(idx) {
+            currentIdx = idx;
+            showImage();
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lb.classList.remove('active');
+            lbVid.pause();
+            document.body.style.overflow = '';
+        }
+
+        function showImage() {
+            const item = imgs[currentIdx];
+            const isVid = /\.(mp4|mov|webm)$/i.test(item.src);
+            
+            if (isVid) {
+                lbImg.style.display = 'none';
+                lbVid.style.display = 'block';
+                lbVid.src = item.src;
+                lbVid.play();
+            } else {
+                lbVid.style.display = 'none';
+                lbVid.pause();
+                lbImg.style.display = 'block';
+                lbImg.src = item.src;
+                lbImg.alt = item.label;
+            }
+            lbCounter.textContent = `${currentIdx + 1} / ${imgs.length}`;
+        }
+
+        lbClose.addEventListener('click', closeLightbox);
+        lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+
+        function getNextIdx(dir) {
+            let next = currentIdx;
+            for(let i=0; i<imgs.length; i++) {
+                next = (next + dir + imgs.length) % imgs.length;
+                if (activeCatFilter === 'all' || imgs[next].cat === activeCatFilter) return next;
+            }
+            return currentIdx;
+        }
+        
+        lbPrev.addEventListener('click', e => { e.stopPropagation(); currentIdx = getNextIdx(-1); showImage(); });
+        
+
+        lbNext.addEventListener('click', e => {
+            e.stopPropagation();
+            currentIdx = (currentIdx + 1) % imgs.length;
+            showImage();
+        });
+
+        document.addEventListener('keydown', e => {
+            if (!lb.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') { currentIdx = getNextIdx(-1); showImage(); }
+            if (e.key === 'ArrowRight') { currentIdx = getNextIdx(1); showImage(); }
+        });
+    </script>
+</body>
+
+</html>
